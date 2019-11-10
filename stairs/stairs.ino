@@ -31,7 +31,7 @@ Scheduler     userScheduler; // to control your personal task
 painlessMesh  mesh;
 
 const int pingPin = 15;
-
+long duration, inches, cm;
 
 // User stub
 void sendMessage() ; // Prototype so PlatformIO doesn't complain
@@ -39,8 +39,8 @@ void sendMessage() ; // Prototype so PlatformIO doesn't complain
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
-  String msg = "Hello from node ";
-  msg += mesh.getNodeId();
+  String msg = "stair 1:";
+  msg += cm;
   mesh.sendBroadcast( msg );
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
@@ -82,7 +82,7 @@ void loop() {
   // it will run the user scheduler as well
   mesh.update();
 
-  long duration, inches, cm;
+  
   
   pinMode(pingPin, OUTPUT);
   digitalWrite(pingPin, LOW);
@@ -96,12 +96,6 @@ void loop() {
 
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
-
-  Serial.print(inches);
-  Serial.print("in, ");
-  Serial.print(cm);
-  Serial.print("cm");
-  Serial.println();
 
   delay(100);
 }
