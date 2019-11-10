@@ -1,21 +1,12 @@
 //************************************************************
-// this is a simple example that uses the easyMesh library
+// this is a simple example that uses the painlessMesh library
 //
-// 1. blinks led once for every node on the mesh
-// 2. blink cycle repeats every BLINK_PERIOD
-// 3. sends a silly message to every node on the mesh at a random time between 1 and 5 seconds
-// 4. prints anything it receives to Serial.print
+// 1. sends a silly message to every node on the mesh at a random time between 1 and 5 seconds
+// 2. prints anything it receives to Serial.print
 //
 //
 //************************************************************
 #include <painlessMesh.h>
-
-// some gpio pin that is connected to an LED...
-// on my rig, this is 5, change to the right number of your LED.
-#define   LED             2       // GPIO number of connected LED, ON ESP-12 IS GPIO2
-
-#define   BLINK_PERIOD    3000 // milliseconds until cycle repeat
-#define   BLINK_DURATION  100  // milliseconds LED is on for
 
 #define   MESH_SSID       "Atrium AKW"
 #define   MESH_PASSWORD   "lets go!"
@@ -41,7 +32,7 @@ void sendMessage() {
   String msg = "Hello from node ";
   msg += mesh.getNodeId();
   mesh.sendBroadcast( msg );
-  taskSendMessage.setInterval( random( TASK_SECOND * 1, TASK_SECOND * 5 ));
+  taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
 
 // Needed for painless library
