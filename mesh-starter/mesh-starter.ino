@@ -8,9 +8,9 @@
 //************************************************************
 #include <painlessMesh.h>
 
-#define   MESH_PREFIX       "Atrium AKW"
-#define   MESH_PASSWORD   "lets go!"
-#define   MESH_PORT       5555
+#define MESH_PREFIX "Atrium AKW"
+#define MESH_PASSWORD "lets go!"
+#define MESH_PORT 5555
 
 // Prototypes
 void sendMessage(); 
