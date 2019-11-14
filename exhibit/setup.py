@@ -18,3 +18,9 @@ git clone https://BlackEdder@gitlab.com/BlackEdder/painlessMeshListener.git
 cd painlessMeshListener
 dub
 """)
+
+# install python dependenceis
+os.system("""
+sudo pip install pyosc
+sudo pip install pyserial
+""")
