@@ -1,10 +1,3 @@
-/*
-Creative Embedded Systems
-AKW Installation
-Stairs
-
-*/
-
 //************************************************************
 // this is a simple example that uses the painlessMesh library
 //
@@ -15,9 +8,9 @@ Stairs
 //************************************************************
 #include <painlessMesh.h>
 
-#define MESH_PREFIX "Atrium AKW"
-#define MESH_PASSWORD "lets go!"
-#define MESH_PORT 5555
+#define   MESH_PREFIX     "Atrium AKW"
+#define   MESH_PASSWORD   "lets go!"
+#define   MESH_PORT       5555
 
 // Prototypes
 void sendMessage(); 
@@ -30,19 +23,11 @@ void delayReceivedCallback(uint32_t from, int32_t delay);
 Scheduler     userScheduler; // to control your personal task
 painlessMesh  mesh;
 
-
-int pirPin = 2;
-int pirStat = 0;
-
-int pirPin2 = 4;
-int pirStat2 = 0;
-
-const int pingPin = 15;
-long duration, inches, cm;
-int prevInches;
-int ultrasonicMovement = 0;
-int motionMovement1 = 0;
-int motionMovement2 = 0;
+const int trigPin = 12;
+const int echoPin = 13;
+ 
+long duration;
+long distance;
 
 // User stub
 void sendMessage() ; // Prototype so PlatformIO doesn't complain
@@ -50,16 +35,9 @@ void sendMessage() ; // Prototype so PlatformIO doesn't complain
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
-  String msg = "stair1:";
-  msg += ultrasonicMovement;
-  msg += " ";
-  msg += "stair2:";
-  msg += motionMovement1;
-  msg += " ";
-  msg += "stair3:";
-  msg += motionMovement2;
+  String msg = "elevator 2:";
+  msg += distance;
   mesh.sendBroadcast( msg );
-  Serial.print(msg);
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
 
@@ -69,7 +47,7 @@ void receivedCallback( uint32_t from, String &msg ) {
 }
 
 void newConnectionCallback(uint32_t nodeId) {
-    Serial.printf("--> startHere: New Connection, nodeId = %u\n", nodeId);
+  Serial.printf("--> startHere: New Connection, nodeId = %u\n", nodeId);
 }
 
 void changedConnectionCallback() {
@@ -94,61 +72,33 @@ void setup() {
 
   userScheduler.addTask( taskSendMessage );
   taskSendMessage.enable();
-
-  pinMode(pirPin, INPUT);
-
-  pinMode(pirPin2, INPUT);
 }
 
 void loop() {
   // it will run the user scheduler as well
   mesh.update();
-
-  pirStat = digitalRead(pirPin);
-  if (pirStat == HIGH) {
-    motionMovement1 = 1;
-  }
-  else {
-    motionMovement1 = 0;
-  }
-
-  pirStat2 = digitalRead(pirPin2);
-  if (pirStat2 == HIGH) {
-    motionMovement2 = 1;
-  }
-  else {
-    motionMovement2 = 0;
-  }
   
-  pinMode(pingPin, OUTPUT);
-  digitalWrite(pingPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin, HIGH);
+  pinMode(trigPin, OUTPUT);
+  digitalWrite(trigPin, LOW);
   delayMicroseconds(5);
-  digitalWrite(pingPin, LOW);
-
-  pinMode(pingPin, INPUT);
-  duration = pulseIn(pingPin, HIGH);
-  
-  prevInches = inches;
-  
-  inches = microsecondsToInches(duration);
-  cm = microsecondsToCentimeters(duration);
-  
-  if (prevInches > inches){
-    ultrasonicMovement = 1;
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  pinMode(echoPin, INPUT);
+ 
+  //Reads the echoPin and the time it
+  //took for the HIGH pulse to return
+  duration = pulseIn(echoPin, HIGH);
+ 
+  //Calculating the distance in cm
+  distance = (duration/2) / 29;
+ 
+  //Checking to see if the discance is less than 400
+  //to avoid getting alerts when object is out of range.
+  if (distance < 400){
+    Serial.print("distance: ");
+    Serial.println(distance);
   }
-  else{
-    ultrasonicMovement = 0;
-  }
-
-  delay(100);
-}
-
-long microsecondsToInches(long microseconds){
-  return microseconds / 74 / 2;
-}
-
-long microsecondsToCentimeters(long microseconds){
-  return microseconds / 29 / 2;
+ 
+  delay(200);
 }
