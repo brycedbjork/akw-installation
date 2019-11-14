@@ -5,10 +5,12 @@ import time
 import OSC
 
 #os.system("painlessMeshBoost -c 10.20.201.2 >> logs.log")
-os.system("painlessMeshBoost -c 127.0.0.1 >> logs.log")
+#os.system("painlessMeshBoost -c 127.0.0.1 >> logs.log")
+
+ip='172.27.136.132'
 
 c = OSC.OSCClient()
-c.connect(('127.0.0.1', 12000))
+c.connect((ip, 12001))
 
 class Listener():
 	osc_client = None
@@ -19,7 +21,7 @@ class Listener():
 
 	def sendOSC(self, content):
 		msg = OSC.OSCMessage()
-		msg.setAddress("/wand")
+		msg.setAddress("/test")
 		for c in content:
 			msg.append(c)
 		self.osc_client.send(msg)
@@ -27,7 +29,7 @@ class Listener():
 listener = Listener()
 listener.add_osc_connect(c)
 
-file = open('logs.log', 'r')
+file = open('test.log', 'r')
 while True:
   where = file.tell()
   line = file.readline()
@@ -36,8 +38,11 @@ while True:
     file.seek(where)
   else:
     data = line
-    
+
     try:
         listener.sendOSC(data)
+	print(data)
     except Exception as e:
         print(e)
+	print(data)
+	exit(1)
