@@ -10,12 +10,12 @@ Varsha Raghavan
 
 ## Input Sensors and Devices
 
-5 ESP32s
-4 Motion Sensors
-3 Ultrasonics
-1 IR Sensor
-1 Microphone
-1 Switch
+5 ESP32s,
+4 Motion Sensors,
+3 Ultrasonics,
+1 IR Sensor,
+1 Microphone,
+1 Switch,
 1 LED
 
 ## Input Network Setup
