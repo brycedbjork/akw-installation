@@ -30,10 +30,19 @@ void delayReceivedCallback(uint32_t from, int32_t delay);
 Scheduler     userScheduler; // to control your personal task
 painlessMesh  mesh;
 
+
+int pirPin = 2;
+int pirStat = 0;
+
+int pirPin2 = 4;
+int pirStat2 = 0;
+
 const int pingPin = 15;
 long duration, inches, cm;
 int prevInches;
-int movement;
+int ultrasonicMovement = 0;
+int motionMovement1 = 0;
+int motionMovement2 = 0;
 
 // User stub
 void sendMessage() ; // Prototype so PlatformIO doesn't complain
@@ -41,9 +50,16 @@ void sendMessage() ; // Prototype so PlatformIO doesn't complain
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
-  String msg = "stair 1:";
-  msg += movement;
+  String msg = "stair1:";
+  msg += ultrasonicMovement;
+  msg += " ";
+  msg += "stair2:";
+  msg += motionMovement1;
+  msg += " ";
+  msg += "stair3:";
+  msg += motionMovement2;
   mesh.sendBroadcast( msg );
+  Serial.print(msg);
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
 
@@ -78,13 +94,31 @@ void setup() {
 
   userScheduler.addTask( taskSendMessage );
   taskSendMessage.enable();
+
+  pinMode(pirPin, INPUT);
+
+  pinMode(pirPin2, INPUT);
 }
 
 void loop() {
   // it will run the user scheduler as well
   mesh.update();
 
-  
+  pirStat = digitalRead(pirPin);
+  if (pirStat == HIGH) {
+    motionMovement1 = 1;
+  }
+  else {
+    motionMovement1 = 0;
+  }
+
+  pirStat2 = digitalRead(pirPin2);
+  if (pirStat2 == HIGH) {
+    motionMovement2 = 1;
+  }
+  else {
+    motionMovement2 = 0;
+  }
   
   pinMode(pingPin, OUTPUT);
   digitalWrite(pingPin, LOW);
@@ -101,9 +135,11 @@ void loop() {
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
   
-  movement = 0;
-  if (prevInches > inches + 10){
-    movement = 1;
+  if (prevInches > inches){
+    ultrasonicMovement = 1;
+  }
+  else{
+    ultrasonicMovement = 0;
   }
 
   delay(100);
