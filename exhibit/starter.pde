@@ -6,7 +6,7 @@ OscP5 oscP5;
 void setup() {
   size(720, 480);
 
-  oscP5 = new OscP5(this, 5555);   // listening
+  oscP5 = new OscP5(this, 6666);   // listening
 }
 
 void oscEvent(OscMessage theOscMessage) {
