@@ -28,6 +28,6 @@ The intent with these input locations is to capture the general activity that ta
 
 ## Data Network Setup
 
-In order to communicate all input values from the sensors in a centralized way, we have implemented a mesh network via painless mesh. Each ESP32 is associated with a specific node that are all hosted on the same port (5555). When sensor values are received, a message is sent through this port that communicates the specific input value and the node it originated from. A Raspberry Pi will be listening on the same port for these messages, and as it receives them it will determine the appropriate output.
+In order to communicate all input values from the sensors in a centralized way, we have implemented a mesh network via Painless Mesh. Each ESP32 is associated with a specific node that are all hosted on the same port (5555). When sensor values are received, a message is sent through this port that communicates the specific input value and the node it originated from. A Raspberry Pi, connected through Painless Mesh Boost, will be listening on the same port for these messages, and as it receives them it will determine the appropriate output.
 
 
