@@ -21,6 +21,9 @@ Varsha Raghavan
 ## Input Network Setup
 
 Our installation is built around the staircase located between floors 2 and 3 in AKW. Two ESP32s with a combination of ultrasonic, motion, and IR sensors will be mounted on the side of the staircase, and each sensor will be associated with a specific step (six steps in total). Two ESP32s with one ultrasonic sensor each will be mounted at the top of the elevator entryways in floor 2. Finally the last ESP32 attached to a microphone, switch, and LED will be mounted on the wall near the staircase.
+
+![](74574881_521925495201015_2115199104685441024_n.jpg)
+
 The intent with these input locations is to capture the general activity that takes place on AKW floor 2. Specifically, the elevator sensors will capture how often each elevator is used, the stair sensors will capture whether that specific stair has been stepped on or not, and the microphone wall mount will provide the user with an option to flip a switch and record the surrounding noise level/ speak into it.  
 
 ## Data Network Setup
