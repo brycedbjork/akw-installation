@@ -4,7 +4,7 @@ import socket
 import random
 import time
 
-UDP_IP = "192.168.1.2"
+UDP_IP = "127.0.0.1"
 UDP_PORT = 57222
 
 sock = socket.socket(socket.AF_INET, # Internet
