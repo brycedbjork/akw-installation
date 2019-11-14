@@ -45,7 +45,27 @@ Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 void sendMessage() {
   String msg;
   msg = "microphone:";
-  msg += sum;
+
+  // pad the message
+  if (sum < 10) {
+    msg += "000";
+    msg += sum;
+  }
+  // pad the message
+  else if (sum < 100) {
+    msg += "00";
+    msg += sum;
+  }
+  // pad the message
+  else if (sum < 1000) {
+    msg += "000";
+    msg += sum;
+  }
+  // pad the message
+  else {
+    msg += sum;
+  }
+  
   //msg += mesh.getNodeId();
   mesh.sendBroadcast( msg );
   taskSendMessage.setInterval( TASK_SECOND * 1 );
@@ -94,7 +114,7 @@ void loop() {
 
     switchState = digitalRead(switchPin);
     sum = 0;
-    if (switchState){
+    //if (true){
 
       digitalWrite(led, HIGH);
       long pre_sum = 0;
@@ -109,10 +129,10 @@ void loop() {
       //Serial.println(sum);
    
       delay(10);
-    }
-    else {
-      digitalWrite(led, LOW);
-    }
+    //}
+//    else {
+//      digitalWrite(led, LOW);
+//    }
   
   // it will run the user scheduler as well
   mesh.update();
