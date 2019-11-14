@@ -2,10 +2,10 @@
 
 ## Members
 
-Bryce Bjork
-Felicia Chang
-Justin Cong
-Yuki de Pourbaix
+Bryce Bjork,
+Felicia Chang,
+Justin Cong,
+Yuki de Pourbaix,
 Varsha Raghavan
 
 ## Input Sensors and Devices
