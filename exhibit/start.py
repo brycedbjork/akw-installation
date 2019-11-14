@@ -4,7 +4,7 @@ import os
 import time
 import OSC
 
-os.system("./painlessMeshBoost -c 10.20.201.2 >> logs.log")
+os.system("painlessMeshBoost -c 10.20.201.2 >> logs.log")
 
 c = OSC.OSCClient()
 c.connect(('127.0.0.1', 6666))
