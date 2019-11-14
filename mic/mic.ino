@@ -58,7 +58,7 @@ void sendMessage() {
   }
   // pad the message
   else if (sum < 1000) {
-    msg += "000";
+    msg += "0";
     msg += sum;
   }
   // pad the message
