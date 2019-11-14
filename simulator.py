@@ -1,7 +1,8 @@
-#! /usr/bin/python3
+#! /usr/bin/python
 
 import socket
 import random
+import time
 
 UDP_IP = "192.168.1.2"
 UDP_PORT = 57222
@@ -62,3 +63,4 @@ if __name__ == "__main__":
             stair_6()
         else:
             mic()
+        time.sleep(random.random())
