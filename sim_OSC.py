@@ -7,8 +7,10 @@ import OSC
 #os.system("painlessMeshBoost -c 10.20.201.2 >> logs.log")
 #os.system("painlessMeshBoost -c 127.0.0.1 >> logs.log")
 
+ip='172.27.136.132'
+
 c = OSC.OSCClient()
-c.connect(('127.0.0.1', 12001))
+c.connect((ip, 12001))
 
 class Listener():
 	osc_client = None
