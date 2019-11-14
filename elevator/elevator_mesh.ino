@@ -35,9 +35,8 @@ void sendMessage() ; // Prototype so PlatformIO doesn't complain
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
-  String msg = "Elevator";
-  msg += mesh.getNodeId();
-  msg += String(distance);
+  String msg = "elevator 1:";
+  msg += distance;
   mesh.sendBroadcast( msg );
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
@@ -62,9 +61,6 @@ void nodeTimeAdjustedCallback(int32_t offset) {
 void setup() {
   Serial.begin(115200);
 
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-
 //mesh.setDebugMsgTypes( ERROR | MESH_STATUS | CONNECTION | SYNC | COMMUNICATION | GENERAL | MSG_TYPES | REMOTE ); // all types on
   mesh.setDebugMsgTypes( ERROR | STARTUP );  // set before init() so that you can see startup messages
 
@@ -82,18 +78,20 @@ void loop() {
   // it will run the user scheduler as well
   mesh.update();
   
+  pinMode(trigPin, OUTPUT);
   digitalWrite(trigPin, LOW);
   delayMicroseconds(5);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
+  pinMode(echoPin, INPUT);
  
   //Reads the echoPin and the time it
   //took for the HIGH pulse to return
   duration = pulseIn(echoPin, HIGH);
  
-  //Calculating the distance in in
-  distance = (duration/2) / 74;
+  //Calculating the distance in cm
+  distance = (duration/2) / 29;
  
   //Checking to see if the discance is less than 400
   //to avoid getting alerts when object is out of range.
