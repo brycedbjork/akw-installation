@@ -32,6 +32,8 @@ painlessMesh  mesh;
 
 const int pingPin = 15;
 long duration, inches, cm;
+int prevInches;
+int movement;
 
 // User stub
 void sendMessage() ; // Prototype so PlatformIO doesn't complain
@@ -40,7 +42,7 @@ Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
   String msg = "stair 1:";
-  msg += cm;
+  msg += movement;
   mesh.sendBroadcast( msg );
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
@@ -93,9 +95,16 @@ void loop() {
 
   pinMode(pingPin, INPUT);
   duration = pulseIn(pingPin, HIGH);
-
+  
+  prevInches = inches;
+  
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
+  
+  movement = 0;
+  if (prevInches > inches + 10){
+    movement = 1;
+  }
 
   delay(100);
 }
