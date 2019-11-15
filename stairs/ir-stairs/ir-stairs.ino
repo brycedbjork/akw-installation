@@ -47,7 +47,7 @@ void sendMessage() {
     mesh.sendBroadcast( "st_5" );
   }
   if (irMovement2 == 1) {
-    mesh.sendBroadcast( "st_5" );
+    mesh.sendBroadcast( "st_6" );
   }
   String msg = "stair4:";
   msg += motionMovement;

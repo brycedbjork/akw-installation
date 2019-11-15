@@ -25,6 +25,7 @@ painlessMesh  mesh;
 
 const int trigPin = 12;
 const int echoPin = 13;
+const int THRESHOLD = 100;
  
 long duration;
 long distance;
@@ -35,9 +36,11 @@ void sendMessage() ; // Prototype so PlatformIO doesn't complain
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
-  String msg = "elevator 2:";
+  String msg = "elevator 1:";
   msg += distance;
-  mesh.sendBroadcast( msg );
+  if (distance > THRESHOLD) {
+    mesh.sendBroadcast( "el_1" );
+  }
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
 
