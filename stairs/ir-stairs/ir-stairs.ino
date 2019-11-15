@@ -94,7 +94,7 @@ void setup() {
   userScheduler.addTask( taskSendMessage );
   taskSendMessage.enable();
 
-  pinMode(irPin, INPUT);
+  pinMode(irPin1, INPUT);
   pinMode(irPin2, INPUT);
 }
 
@@ -107,7 +107,7 @@ void loop() {
     motionMovement = 1;
   }
   else {
-    motionMovement1= 0;
+    motionMovement= 0;
   }
 
   irRead1 = digitalRead(irPin1);
