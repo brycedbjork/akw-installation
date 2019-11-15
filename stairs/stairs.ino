@@ -50,6 +50,15 @@ void sendMessage() ; // Prototype so PlatformIO doesn't complain
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
+  if (ultrasonicMovement == 1) {
+    mesh.sendBroadcast( "st_1" );
+  }
+  if (motionMovement1 == 1) {
+    mesh.sendBroadcast( "st_2" );
+  }
+  if (motionMovement2 == 1) {
+    mesh.sendBroadcast( "st_3" );
+  }
   String msg = "stair1:";
   msg += ultrasonicMovement;
   msg += " ";
@@ -58,7 +67,7 @@ void sendMessage() {
   msg += " ";
   msg += "stair3:";
   msg += motionMovement2;
-  mesh.sendBroadcast( msg );
+  //mesh.sendBroadcast( msg );
   Serial.print(msg);
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }

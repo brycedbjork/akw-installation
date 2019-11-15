@@ -40,6 +40,15 @@ void sendMessage() ;
 Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
+  if (motionMovement == 1) {
+    mesh.sendBroadcast( "st_4" );
+  }
+  if (irMovement1 == 1) {
+    mesh.sendBroadcast( "st_5" );
+  }
+  if (irMovement2 == 1) {
+    mesh.sendBroadcast( "st_5" );
+  }
   String msg = "stair4:";
   msg += motionMovement;
   msg += " ";
@@ -48,7 +57,7 @@ void sendMessage() {
   msg += " ";
   msg += "stair6:";
   msg += irMovement2;
-  mesh.sendBroadcast( msg );
+  //mesh.sendBroadcast( msg );
   Serial.print(msg);
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
