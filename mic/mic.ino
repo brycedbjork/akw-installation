@@ -109,13 +109,13 @@ void setup() {
 }
 
 int switchState;
-
+ 
 void loop() {
 
     switchState = digitalRead(switchPin);
     sum = 0;
-    //if (true){
-
+    if (switchState){  
+  
       digitalWrite(led, HIGH);
       long pre_sum = 0;
       
@@ -128,11 +128,11 @@ void loop() {
 
       //Serial.println(sum);
    
-      delay(10);
-    //}
-//    else {
-//      digitalWrite(led, LOW);
-//    }
+      //delay(10);
+    }
+    else {
+      digitalWrite(led, LOW);
+    }
   
   // it will run the user scheduler as well
   mesh.update();
