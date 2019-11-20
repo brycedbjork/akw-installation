@@ -44,7 +44,7 @@ Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
   String msg;
-  msg = "microphone:";
+  msg = "00";
 
   // pad the message
   if (sum < 10) {

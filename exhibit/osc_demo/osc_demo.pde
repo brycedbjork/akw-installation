@@ -20,6 +20,8 @@ void oscEvent(OscMessage theOscMessage) {
     print(theOscMessage.get(1).stringValue());
     print(theOscMessage.get(2).stringValue());
     print(theOscMessage.get(3).stringValue());
+    print(theOscMessage.get(4).stringValue());
+    print(theOscMessage.get(5).stringValue());
     println();
   }
 }

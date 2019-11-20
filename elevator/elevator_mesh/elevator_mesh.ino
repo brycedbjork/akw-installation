@@ -39,7 +39,9 @@ void sendMessage() {
   String msg = "elevator 1:";
   msg += distance;
   if (distance > THRESHOLD) {
-    mesh.sendBroadcast( "el_1" );
+    mesh.sendBroadcast( "el_1 1" );
+  } else {
+    mesh.sendBroadcast( "el_1 0" );
   }
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }

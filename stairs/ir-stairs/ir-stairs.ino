@@ -41,13 +41,19 @@ Task taskSendMessage( TASK_SECOND * 1 , TASK_FOREVER, &sendMessage );
 
 void sendMessage() {
   if (motionMovement == 1) {
-    mesh.sendBroadcast( "st_4" );
+    mesh.sendBroadcast( "st_4 1" );
+  } else {
+    mesh.sendBroadcast( "st_4 0" );
   }
   if (irMovement1 == 1) {
-    mesh.sendBroadcast( "st_5" );
+    mesh.sendBroadcast( "st_5 1" );
+  } else {
+    mesh.sendBroadcast( "st_5 0" );
   }
   if (irMovement2 == 1) {
-    mesh.sendBroadcast( "st_6" );
+    mesh.sendBroadcast( "st_6 1" );
+  } else {
+    mesh.sendBroadcast( "st_6 0" );
   }
   String msg = "stair4:";
   msg += motionMovement;
