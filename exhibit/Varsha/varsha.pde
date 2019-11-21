@@ -13,6 +13,8 @@ stair sts[] = new stair[6];
 
 void setup() {
   fullScreen(P3D);
+  background(0);
+  smooth();
   oscP5 = new OscP5(this, 12001);
   stepW = width / 4;
   stepH = height / 8;
@@ -84,27 +86,15 @@ void mic(int val) {
 }
 
 private class elevator {
-  private int r;
-  private int g;
-  private int b;
-  private float x;
-  private float y;
-  private float z;
-  private float xd;
-  private float yd;
-  private float zd;
   private boolean active;
   
-  elevator(int nr, int ng, int nb, float nx, float ny, float nz, float nxd, float nyd, float nzd) {
-    this.r = nr;
-    this.g = ng;
-    this.b = nb;
-    this.x = nx;
-    this.y = ny;
-    this.z = nz;
-    this.xd = nxd;
-    this.yd = nyd;
-    this.zd = nzd;
+  elevator() {
+    this.r = random(256);
+    this.g = random(256);
+    this.b = random(256);
+    this.x = int(random(1500));
+    this.y = int(random(1500));
+    this.pointilize = random(100);
     this.active = false;
   }
   
@@ -117,10 +107,15 @@ private class elevator {
         this.b += 5;
       }
     }
-    fill(this.r,this.g,this.b,100);
-    ellipse(this.x, this.y,this.z,12);
-    rotateZ(this.zd);
-    stroke(0, 0, 0);
+  int loc = x + y*100;
+  
+  float r = random(256);
+  float g = random(256);
+  float b = random(256);
+  noStroke();
+  
+  fill(r,g,b,100);
+  ellipse(x, y,pointillize,pointillize);
  }
  
  void colour(int nr, int ng, int nb) {
@@ -169,10 +164,6 @@ private class stair {
         this.g += 5;
       }
     }
-    fill(this.r,this.g,this.b,100);
-    ellipse(this.x, this.y,this.z,12);
-    rotateZ(this.zd);
-    stroke(0, 0, 0);
   }
   
   void colour(int nr, int ng, int nb) {
