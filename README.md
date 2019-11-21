@@ -50,7 +50,7 @@ Creating the microphone box to get input is pretty straightforward, not even req
 - Power block and/or USB battery pack.
 
 ### Hooking it Up
-![Hookup][microphone.png]
+![Hookup](microphone.png)
 
 Time to hook up the cables! Above is an example of the wiring hookup, although my box uses an ESP32, not an Arduino. 
 
