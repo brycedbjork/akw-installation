@@ -31,7 +31,7 @@ The intent with these input locations is to capture the general activity that ta
 In order to communicate all input values from the sensors in a centralized way, we have implemented a mesh network via Painless Mesh. Painless Mesh is a wifi-enabled mesh network. Each ESP32 is associated with a specific node, and all nodes are hosted on the same port (5555). When sensor values are received, a message is sent through this port that communicates the specific input value and the node it originated from. A Raspberry Pi, connected through Painless Mesh Listener, will be listening on the same port for these messages, and as it receives them it will determine the appropriate output.
 We rely on painlessMesh and painlessMeshBoost.
 An example of the painlessMeshBoost in action on the raspberry pi can be found using the sim_osc.py in conjunction with the .pde file found in exhibit.
-Please note that all valid messages must come from \test and be 4 characters long.
-In the case of the microphone, this means that some values require padding, i.e., 0 -> 0000
+Please note that all valid messages must be 6 characters long.
+In the case of the microphone, this means that some values require padding, i.e., 0 -> 000000
 
 

@@ -44,7 +44,9 @@ if __name__ == "__main__":
             data = 'el_1_1'
         elif cmd[0] == 'd':
             data = 'el_2_1'
-        else:
+        elif cmd[0] == 'q':
+	    exit(0)
+	else:
             data = cmd.zfill(6)
         try:
             listener.sendOSC(data)
