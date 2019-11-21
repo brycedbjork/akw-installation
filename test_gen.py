@@ -1,6 +1,7 @@
 import random
 
 if __name__ == "__main__":
+    old_cur = 0
     cur = 0
     file = open("sensor_record.txt", "w")
     for count in range(0, 3000):
@@ -23,4 +24,8 @@ if __name__ == "__main__":
             file.write("st_6_1")
         file.write(" " + str(cur).zfill(10) + '\n')
         cur = cur + random.randint(100, 1000)
+        if (cur / 1000) > (old_cur / 1000 + 1):
+            old_cur = cur
+            cur = cur + 10
+            file.write(str(random.randint(0, 4095)).zfill(6) + " " + str(cur).zfill(10) + '\n')
     file.close()

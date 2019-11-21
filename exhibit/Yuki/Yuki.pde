@@ -10,6 +10,7 @@ float elevW;
 float elevH;
 elevator elevs[] = new elevator[2];
 stair sts[] = new stair[6];
+microphone mic;
 
 void setup() {
   fullScreen(P3D);
@@ -28,6 +29,7 @@ void setup() {
   lights();
   elevs[0] = new elevator(255, 255, 255, height/5, height - (width / 5), 0, 0.2, PI, 0);
   elevs[1] = new elevator(255, 255, 255, width - (height / 5), height - (width / 5), 0, -0.2, 0, 0);
+  mic = new microphone(255, 255, 255, width / 2, height / 8, 0, 0.2, 0, 0);
 }
 
 void draw() {
@@ -38,6 +40,7 @@ void draw() {
   for (int i = 0; i < 6; i++) {
     sts[i].drawMe();
   }
+  mic.drawMe();
 }
 
 void oscEvent(OscMessage theOscMessage) {
@@ -47,7 +50,7 @@ void oscEvent(OscMessage theOscMessage) {
     }
     System.out.println(mes);
     if (mes.charAt(0) == '0') {
-      mic(Integer.parseInt(mes));
+      mic.changeVal(Integer.parseInt(mes));
     } else if (mes.charAt(5) == '1') {
       char num = mes.charAt(3);
       if (mes.charAt(0) == 'e') {
@@ -80,7 +83,57 @@ void oscEvent(OscMessage theOscMessage) {
     }
 }
 
-void mic(int val) {
+private class microphone {
+  private int r;
+  private int g;
+  private int b;
+  private int val;
+  private float x;
+  private float y;
+  private float z;
+  private float xd;
+  private float yd;
+  private float zd;
+  
+  microphone(int nr, int ng, int nb, float nx, float ny, float nz, float nxd, float nyd, float nzd) {
+    this.r = nr;
+    this.g = ng;
+    this.b = nb;
+    this.x = nx;
+    this.y = ny;
+    this.z = nz;
+    this.xd = nxd;
+    this.yd = nyd;
+    this.zd = nzd;
+    this.val = 900;
+  }
+  
+  void drawMe() {
+    pushMatrix();
+    float nR = this.r;
+    nR = 255 / 4095 * this.val;
+    this.colour((int) nR, this.val % 255, val % 255);
+    fill(this.r, this.g, this.b);
+    translate(this.x, this.y, this.z);
+    rotateY(this.yd);
+    rotateX(this.xd);
+    rotateZ(this.zd);
+    stroke(0, 0, 0);
+    int size = (int) (10 + sqrt(val));
+    sphere(size);
+    popMatrix();
+    this.yd += 0.1;
+  }
+  
+  void colour(int nr, int ng, int nb) {
+    this.r = nr;
+    this.g = ng;
+    this.b = nb;
+  }
+  
+  void changeVal(int nV) {
+    this.val = nV;
+  }
 }
 
 private class elevator {

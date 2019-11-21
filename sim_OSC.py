@@ -28,8 +28,10 @@ class Listener():
 
 listener = Listener()
 listener.add_osc_connect(c)
+old_length = 0
 
-file = open('test.log', 'r')
+#file = open('test.log', 'r')
+file = open('sensor_record.txt', 'r')
 while True:
   where = file.tell()
   line = file.readline()
@@ -38,14 +40,16 @@ while True:
     file.seek(where)
   else:
     data = line
-
     try:
         listener.sendOSC(data)
         print(data)
-	time.sleep(1)
     except Exception as e:
         print(e)
         print(data)
-    	exit(1)
+        exit(1)
+    length = int(data[-10:])
+    print((length - old_length) / 1000.0)
+    time.sleep((length - old_length) / 1000.0)
+    old_length = length
 
 print("All Done!")
