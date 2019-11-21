@@ -15,14 +15,16 @@ stair sts[] = new stair[6];
 void setup() {
   fullScreen();
   oscP5 = new OscP5(this, 12001);
-  sts[0] = new stair(255, 255, 255, 0, 0, width/4, height);
-  sts[1] = new stair(255, 255, 255, width/4, 0, width/4, height);
-  sts[2] = new stair(255, 255, 255, width/2, 0, width/4, height);
-  elevs[0] = new elevator(255, 255, 255, width*3/4, 0, width/4, height/3);
-  elevs[1] = new elevator(255, 255, 255, width*3/4, height*2/3, width/4, height/3);
+  sts[0] = new stair(255, 255, 255, 0, 0, width/3, height);
+  sts[1] = new stair(255, 255, 255, width/3, 0, width/3, height);
+  sts[2] = new stair(255, 255, 255, width*2/3, 0, width/3, height);
+  elevs[0] = new elevator(255, 255, 255, width/3, height/3, width/3, height/3);
+  elevs[1] = new elevator(255, 255, 255, width*2/3, height/3, width/3, height/3);
 }
 
 void draw() {
+  background(map(micVal, 0, 400, 100, 255), map(micVal, 400, 1000, 100, 255), map(micVal, 1000, 1400, 100, 255));
+  fill(random(0, 255), random(0, 255), random(0, 255));
   elevs[0].drawMe();
   elevs[1].drawMe();
   for (int i = 0; i < 3; i++) {
@@ -66,8 +68,6 @@ void oscEvent(OscMessage theOscMessage) {
 
 void mic(int val) {
   micVal = val;
-  fill(map(micVal, 0, 400, 100, 255), map(micVal, 400, 1000, 100, 255), map(micVal, 1000, 1400, 100, 255));
-  rect(width*3/4, height/3, width/4, height/3);
 }
 
 private class elevator {
@@ -102,7 +102,8 @@ private class elevator {
       }
     }
     fill(this.r, this.g, this.b);
-    rect(this.x, this.y, this.nw, this.nh);
+    rect(this.nw, this.nh)
+    translate(this.x, this.y);
     stroke(0, 0, 0);
   }
   
@@ -150,7 +151,8 @@ private class stair {
       }
     }
     fill(this.r, this.g, this.b);
-    rect(this.x, this.y, this.nw, this.nh);
+    rect(this.nw, this.nh)
+    translate(this.x, this.y);
     stroke(0, 0, 0);
   }
   
