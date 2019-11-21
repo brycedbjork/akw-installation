@@ -28,8 +28,8 @@ void setup() {
   sts[4] = new stair(255, 255, 255, (width / 2), height - (stepH * 6), -200, 0, 0, 0);
   sts[5] = new stair(255, 255, 255, (width / 2), height - (stepH * 7), -250, 0, 0, 0);
   lights();
-  elevs[0] = new elevator(255, 255, 255, height/5, height - (width / 5), 0, 0.2, PI, 0);
-  elevs[1] = new elevator(255, 255, 255, width - (height / 5), height - (width / 5), 0, -0.2, 0, 0);
+  elevs[0] = new elevator();
+  elevs[1] = new elevator();
 }
 
 void draw() {
@@ -87,6 +87,12 @@ void mic(int val) {
 
 private class elevator {
   private boolean active;
+  private float r;
+  private float g;
+  private float b;
+  private int x;
+  private int y;
+  private float pointilize;
   
   elevator() {
     this.r = random(256);
