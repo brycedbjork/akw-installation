@@ -19,7 +19,6 @@ class Listener():
 
 	def sendOSC(self, content):
 		msg = OSC.OSCMessage()
-		msg.setAddress("/wand")
 		for c in content:
 			msg.append(c)
 		self.osc_client.send(msg)
