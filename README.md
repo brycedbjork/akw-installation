@@ -35,3 +35,39 @@ Please note that all valid messages must be 6 characters long.
 In the case of the microphone, this means that some values require padding, i.e., 0 -> 000000
 
 
+## Microphone Documentation - Justin
+
+Creating the microphone box to get input is pretty straightforward, not even requiring a breadboard! This will gather audio levels of the area around the microphone, and send them to other ESP32s on the mesh network. If the box is switched off, audio levels will not be recorded, and the LED will be switched off. Flip the switch to turn on the LED, and the microphone will begin capturing and sending audio levels. 
+
+### Hardware Requirements
+- Project box
+- Espressif ESP32 DevKitC
+- SPST Switch (sodered)
+- Red LED (sodered)
+- Various jumper cables
+- Microphone
+- Micro USB cable
+- Power block and/or USB battery pack.
+
+### Hooking it Up
+![Hookup][microphone.png]
+
+Time to hook up the cables! Above is an example of the wiring hookup, although my box uses an ESP32, not an Arduino. 
+
+#### SPST Switch
+- Connect one end to the GND on the ESP32.
+- Connect the other end to the pin 21 on the ESP32.
+
+#### LED
+- Connect one end to the GND on the ESP32.
+- Connect the other end to pin 13 on the ESP32.
+
+#### Microphone
+- Connect the VCC to the 5V out on the ESP32.
+- Connect the GND to the GND out on the ESP32.
+- Connect the OUT to pin 33 on the ESP32.
+
+Place all of these in the project box, drilling holes for the LED, microphone, switch, and micro USB cable. Hook up the micro USB cable to the ESP32 and connect it to power via a power block or a battery pack, and you'll be ready to go!
+
+### Software to Install
+- You'll need to install the Arduino IDE in order to flash the ESP32 with the mic.ino file!
