@@ -4,7 +4,7 @@ if __name__ == "__main__":
     old_cur = 0
     cur = 0
     file = open("sensor_record.txt", "w")
-    for count in range(0, 3000):
+    for count in range(0, 72000):
         choice = random.randint(0, 7)
         if choice == 0:
             file.write("el_1_1")
