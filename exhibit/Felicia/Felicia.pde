@@ -110,8 +110,8 @@ private class elevator {
   
   void drawMe() {
     stroke(this.r+random(10), this.g, this.b);
-    line(width, this.y + random(100), width/2, sin(this.xd+2)*1100);
-    line(0, this.y + random(100), this.y + random(100), sin(this.xd+2)*1100);
+    rect(width-100, this.y + random(100), width/2, sin(this.xd+2)*1100);
+    rect(0, this.y + random(100), this.y + random(100), sin(this.xd+2)*1100);
   }
   
     void drawMe2() {
@@ -124,7 +124,7 @@ private class elevator {
       }
     }
     stroke(this.r, this.g, this.b);
-    line(width, this.y + random(100), this.x  + random(100), sin(this.xd+2)*1100);
+    rect(width, this.y + random(100), this.x  + random(100), sin(this.xd+2)*1100);
   }
   
   void colour(int nr, int ng, int nb) {
@@ -166,8 +166,8 @@ private class stair {
   
   void drawMe() {
     stroke(this.r + random(10), this.g, this.b);
-    line(this.x + random(100), 0, this.x + random(200), sin(this.xd+2)*1100);
-    line(this.x - random(100), 0, this.x + random(200), sin(this.xd+2)*1100);
+    rect(this.x + random(100), 0, this.x - random(200), sin(this.xd+2)*1100);
+    rect(this.x - random(100), 0, this.x - random(200), sin(this.xd+2)*1100);
   }
   
   void colour(int nr, int ng, int nb) {
