@@ -22,9 +22,9 @@ void delayReceivedCallback(uint32_t from, int32_t delay);
 Scheduler     userScheduler; // to control your personal task
 painlessMesh  mesh;
 
-int motionPin = 27;
+int motionPin = 26;
 int irPin1 = 33;
-int irPin2 = 21;
+int irPin2 = 16;
 
 int motionRead;
 int irRead1;
@@ -63,8 +63,9 @@ void sendMessage() {
   msg += " ";
   msg += "stair6:";
   msg += irMovement2;
+  msg += "\n";
   //mesh.sendBroadcast( msg );
-  Serial.print(msg);
+//  Serial.print(msg);
   taskSendMessage.setInterval( TASK_SECOND * 1 );
 }
 
@@ -108,7 +109,10 @@ void loop() {
   // it will run the user scheduler as well
   mesh.update();
 
+  
+
   motionRead = digitalRead(motionPin);
+  Serial.print(motionRead);
   if (motionRead == HIGH) {
     motionMovement = 1;
   }
@@ -117,6 +121,7 @@ void loop() {
   }
 
   irRead1 = digitalRead(irPin1);
+  Serial.print(irRead1);
   if (irRead1 == HIGH) {
     irMovement1 = 1;
   }
@@ -125,6 +130,7 @@ void loop() {
   }
 
   irRead2 = digitalRead(irPin2);
+  Serial.println(irRead2);
   if (irRead2 == HIGH) {
     irMovement2 = 1;
   }

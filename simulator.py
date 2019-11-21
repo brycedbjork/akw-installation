@@ -45,6 +45,7 @@ def mic():
 if __name__ == "__main__":
     while True:
         r = random.randint(0, 9)
+        print(r)
         if r == 0:
             elev_1()
         elif r == 1:
