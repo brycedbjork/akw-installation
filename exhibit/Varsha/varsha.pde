@@ -118,7 +118,7 @@ private class elevator {
       }
     }
     fill(this.r,this.g,this.b,100);
-    ellipse(this.xd, this.yd,this.zd,this.zd);
+    ellipse(this.x, this.y,this.z,12);
     rotateZ(this.zd);
     stroke(0, 0, 0);
  }
@@ -170,7 +170,7 @@ private class stair {
       }
     }
     fill(this.r,this.g,this.b,100);
-    ellipse(this.xd, this.yd,this.zd,this.zd);
+    ellipse(this.x, this.y,this.z,12);
     rotateZ(this.zd);
     stroke(0, 0, 0);
   }
