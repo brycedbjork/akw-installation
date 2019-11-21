@@ -31,7 +31,7 @@ void setup() {
 }
 
 void draw() {
-  background(0, 0, 0);
+  background(255, 255, 255);
   fill(255, 0, 0);
   elevs[0].drawMe();
   elevs[1].drawMe2();
@@ -109,16 +109,9 @@ private class elevator {
   }
   
   void drawMe() {
-    if (this.active) {
-      if (this.r == 255) {
-        this.active = false;
-      } else {
-        this.r += 5;
-        this.b += 5;
-      }
-    }
-    stroke(this.r, this.g, this.b);
-    line(0, this.xd, this.xd, sin(this.xd+2)*1100);
+    stroke(this.r+random(10), this.g, this.b);
+    line(width, this.y + random(100), width/2, sin(this.xd+2)*1100);
+    line(0, this.y + random(100), this.y + random(100), sin(this.xd+2)*1100);
   }
   
     void drawMe2() {
@@ -131,7 +124,7 @@ private class elevator {
       }
     }
     stroke(this.r, this.g, this.b);
-    line(width, this.xd, this.xd, sin(this.xd+2)*1100);
+    line(width, this.y + random(100), this.x  + random(100), sin(this.xd+2)*1100);
   }
   
   void colour(int nr, int ng, int nb) {
@@ -172,16 +165,9 @@ private class stair {
   }
   
   void drawMe() {
-    if (this.active) {
-      if (this.r == 255) {
-        this.active = false;
-      } else {
-        this.r += 5;
-        this.g += 5;
-      }
-    }
-    stroke(this.r, this.g, this.b);
-    line(this.xd, 0, this.xd, sin(this.xd+2)*1100);
+    stroke(this.r + random(10), this.g, this.b);
+    line(this.x + random(100), 0, this.x + random(200), sin(this.xd+2)*1100);
+    line(this.x - random(100), 0, this.x + random(200), sin(this.xd+2)*1100);
   }
   
   void colour(int nr, int ng, int nb) {
